@@ -61,7 +61,10 @@
   networking.firewall = {
     enable = true;
     #backend = "nftables";
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [
+      80
+      443
+    ];
   };
   time.timeZone = "Europe/Prague";
 
@@ -111,95 +114,95 @@
         };
       };
     };
-     dynamicConfigOptions = {
-    http = {
-      routers = {
-        trnila-root = {
-          rule = "Host(`trnila.eu`)";
-          entryPoints = [ "web" ];
-          middlewares = [ "to-github" ];
-          service = "noop@internal";
-        };
-        printer = {
-          rule = "Host(`3dprinter.trnila.eu`)";
-          entryPoints = [ "web" ];
-          service = "octoprint";
-        };
-        hass = {
-          rule = "Host(`hass.trnila.eu`)";
-          entryPoints = [ "web" ];
-          service = "hass";
-        };
-        thelounge = {
-          rule = "Host(`trnila.eu`) && PathPrefix(`/irc`)";
-          entryPoints = [ "web" ];
-          middlewares = [ "strip-irc" ];
-          service = "thelounge";
-        };
-        nextbike = {
-          rule = "Host(`trnila.eu`) && PathPrefix(`/nextbike`)";
-          entryPoints = [ "web" ];
-          middlewares = [ "strip-nextbike" ];
-          service = "nextbike";
-        };
-      };
-
-      services = {
-        octoprint = {
-          loadBalancer = {
-            servers = [
-              { url = "http://localhost:5000"; }
-            ];
+    dynamicConfigOptions = {
+      http = {
+        routers = {
+          trnila-root = {
+            rule = "Host(`trnila.eu`)";
+            entryPoints = [ "web" ];
+            middlewares = [ "to-github" ];
+            service = "noop@internal";
+          };
+          printer = {
+            rule = "Host(`3dprinter.trnila.eu`)";
+            entryPoints = [ "web" ];
+            service = "octoprint";
+          };
+          hass = {
+            rule = "Host(`hass.trnila.eu`)";
+            entryPoints = [ "web" ];
+            service = "hass";
+          };
+          thelounge = {
+            rule = "Host(`trnila.eu`) && PathPrefix(`/irc`)";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-irc" ];
+            service = "thelounge";
+          };
+          nextbike = {
+            rule = "Host(`trnila.eu`) && PathPrefix(`/nextbike`)";
+            entryPoints = [ "web" ];
+            middlewares = [ "strip-nextbike" ];
+            service = "nextbike";
           };
         };
 
-        hass = {
-          loadBalancer = {
-            servers = [
-              { url = "http://localhost:8123"; }
-            ];
+        services = {
+          octoprint = {
+            loadBalancer = {
+              servers = [
+                { url = "http://localhost:5000"; }
+              ];
+            };
+          };
+
+          hass = {
+            loadBalancer = {
+              servers = [
+                { url = "http://localhost:8123"; }
+              ];
+            };
+          };
+
+          thelounge = {
+            loadBalancer = {
+              servers = [
+                { url = "http://localhost:9000"; }
+              ];
+            };
+          };
+          nextbike = {
+            loadBalancer = {
+              servers = [
+                { url = "http://localhost:8080"; }
+              ];
+            };
           };
         };
 
-        thelounge = {
-          loadBalancer = {
-            servers = [
-              { url = "http://localhost:9000"; }
-            ];
+        middlewares = {
+          to-github = {
+            redirectRegex = {
+              regex = "^http://trnila\\.eu/?$";
+              replacement = "https://github.com/trnila";
+              permanent = false;
+            };
           };
-        };
-        nextbike = {
-          loadBalancer = {
-            servers = [
-              { url = "http://localhost:8080"; }
-            ];
-          };
-        };
-      };
 
-      middlewares = {
-        to-github = {
-          redirectRegex = {
-            regex = "^http://trnila\\.eu/?$";
-            replacement = "https://github.com/trnila";
-            permanent = false;
+          strip-irc = {
+            stripprefix = {
+              prefixes = [ "/irc" ];
+            };
           };
-        };
 
-        strip-irc = {
-          stripprefix = {
-            prefixes = [ "/irc" ];
-          };
-        };
-
-        strip-nextbike = {
-          stripprefix = {
-            prefixes = [ "/nextbike" ];
+          strip-nextbike = {
+            stripprefix = {
+              prefixes = [ "/nextbike" ];
+            };
           };
         };
       };
     };
-  };
   };
 
   users.users.traefik = {
