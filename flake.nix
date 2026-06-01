@@ -15,7 +15,7 @@
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
-      nixosConfigurations.picko = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.pi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         modules = [
           ./configuration.nix
@@ -30,10 +30,9 @@
               sdImage.compressImage = false;
             }
           )
-
         ];
       };
-      sdImage = self.nixosConfigurations.picko.config.system.build.sdImage;
+      sdImage = self.nixosConfigurations.pi.config.system.build.sdImage;
 
       devShells = forAllSystems (
         system:

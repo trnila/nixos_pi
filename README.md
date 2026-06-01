@@ -1,3 +1,11 @@
-nixos-rebuild --flake .#picko --target-host nix --build-host nix  --fast switch
+# NixOS on pi.trnila.eu
 
-nix build .#sdImage
+The configuration can be remotely deployed by running:
+```sh
+$ nixos-rebuild --flake .#pi --target-host nix --build-host nix --fast switch
+```
+
+The SDcard image can be created with:
+```sh
+$ nix build .#sdImage
+```
