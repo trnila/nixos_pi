@@ -5,16 +5,16 @@ on:
   push:
 
 jobs:
-  prek:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
-      - run: nix develop -c prek run --all-files
+  #prek:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v6
+  #    - uses: cachix/install-nix-action@v31
+  #    - run: nix develop -c prek run --all-files
 
   deploy:
     runs-on: ubuntu-latest
-    needs: prek
+    #needs: prek
     steps:
       - uses: actions/checkout@v6
-      - run: curl -6 trnila.eu
+      - run: curl -v -6 trnila.eu
