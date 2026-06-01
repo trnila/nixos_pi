@@ -25,4 +25,4 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
       - uses: cachix/install-nix-action@v31
-      - run: nix develop -c ./deploy.sh "$DEPLOY_HOST"
+      - run: NIX_SSHOPTS="-o StrictHostKeyChecking=accept-new" nix develop -c ./deploy.sh "$DEPLOY_HOST"
