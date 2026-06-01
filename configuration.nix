@@ -105,6 +105,7 @@
     }
   ];
 
+  services.tailscale.enable = true;
   services.home-assistant = {
     enable = true;
   };

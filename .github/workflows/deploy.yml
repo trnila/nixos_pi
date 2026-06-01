@@ -17,4 +17,17 @@ jobs:
     #needs: prek
     steps:
       - uses: actions/checkout@v6
-      - run: curl -v -6 trnila.eu
+      - uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+      - run: tailscale ping pi.tailea1575.ts.net
+
+      #- run: mkdir -p ~/.ssh
+      #- run: |
+      #    echo "Host nix" > ~/.ssh/config
+      #    echo "  UserKnownHostsFile /dev/null" >> ~/.ssh/config
+      #    echo "  StrictHostKeyChecking no" >> ~/.ssh/config
+      #- uses: cachix/install-nix-action@v31
+      #- run: nix develop -c 'nixos-rebuild --flake .#pi --target-host nix --build-host nix --no-reexec --sudo switch -v'
