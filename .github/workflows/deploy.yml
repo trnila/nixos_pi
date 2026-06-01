@@ -25,4 +25,4 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
       - uses: cachix/install-nix-action@v31
-      - run: nix develop -c 'nixos-rebuild --flake .#pi --target-host $DEPLOY_HOST --build-host $DEPLOY_HOST --no-reexec switch -v'
+      - run: nix develop -c ./deploy.sh "$DEPLOY_HOST"
