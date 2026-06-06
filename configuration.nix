@@ -101,7 +101,20 @@
       entryPoints = {
         web = {
           address = ":80";
+          http.redirections.entrypoint = {
+            to = "https";
+            scheme = "https";
+          };
         };
+        https = {
+          address = ":443";
+          http.tls.certResolver = "letsencrypt";
+        };
+      };
+      certificatesResolvers.letsencrypt.acme = {
+        email = "daniel.trnka@gmail.com";
+        storage = "${config.services.traefik.dataDir}/acme.json";
+        httpChallenge.entryPoint = "web";
       };
       #api.dashboard = true;
       #api.insecure = true;
@@ -116,30 +129,30 @@
       http = {
         routers = {
           trnila-root = {
-            rule = "Host(`trnila.eu`)";
-            entryPoints = [ "web" ];
+            rule = "Host(`trnila.eu`) && Path(`/`)";
+            entryPoints = [ "https" ];
             middlewares = [ "to-github" ];
             service = "noop@internal";
           };
           printer = {
             rule = "Host(`3dprinter.trnila.eu`)";
-            entryPoints = [ "web" ];
+            entryPoints = [ "https" ];
             service = "octoprint";
           };
           hass = {
             rule = "Host(`hass.trnila.eu`)";
-            entryPoints = [ "web" ];
+            entryPoints = [ "https" ];
             service = "hass";
           };
           thelounge = {
             rule = "Host(`trnila.eu`) && PathPrefix(`/irc`)";
-            entryPoints = [ "web" ];
+            entryPoints = [ "https" ];
             middlewares = [ "strip-irc" ];
             service = "thelounge";
           };
           nextbike = {
             rule = "Host(`trnila.eu`) && PathPrefix(`/nextbike`)";
-            entryPoints = [ "web" ];
+            entryPoints = [ "https" ];
             middlewares = [ "strip-nextbike" ];
             service = "nextbike";
           };
@@ -181,7 +194,7 @@
         middlewares = {
           to-github = {
             redirectRegex = {
-              regex = "^http://trnila\\.eu/?$";
+              regex = ".+";
               replacement = "https://github.com/trnila";
               permanent = false;
             };
