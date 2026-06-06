@@ -145,7 +145,7 @@
             service = "hass";
           };
           thelounge = {
-            rule = "Host(`trnila.eu`) && PathPrefix(`/irc`)";
+            rule = "Host(`trnila.eu`) && PathPrefix(`/irc/`)";
             entryPoints = [ "https" ];
             middlewares = [ "strip-irc" ];
             service = "thelounge";
