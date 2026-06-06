@@ -1,6 +1,6 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-  inputs.nextbike.url = "github:trnila/nextbike_rides_viewer/nix";
+  inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
   outputs =
     {
       self,
