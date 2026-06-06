@@ -49,8 +49,8 @@
   systemd.network.networks."90-end0" = {
     matchConfig.Name = "end0";
     address = [
-      "192.168.1.100/24"
-      "2001:470:5816:0:b045:e6d3:3f8:9999/64"
+      "192.168.1.3/24"
+      "2001:470:5816::1:1/64"
     ];
     networkConfig = {
       DHCP = "yes";
