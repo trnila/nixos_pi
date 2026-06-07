@@ -90,6 +90,15 @@
   };
   services.home-assistant = {
     enable = true;
+    extraPackages =
+      python3Packages: with python3Packages; [
+        bthome-ble
+        xiaomi-ble
+        gtts
+        pyoctoprintapi
+        zlib-ng
+        isal
+      ];
   };
   services.thelounge.enable = true;
   services.octoprint.enable = true;
