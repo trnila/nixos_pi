@@ -1,0 +1,50 @@
+esphome:
+  name: bedroom-light
+
+esp8266:
+  board: sonoff_basic
+
+captive_portal:
+logger:
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  min_auth_mode: WPA2
+  ap:
+    ssid: "bedroom-light fallback"
+    password: !secret bedroomlight_fallback_wifi_password
+
+api:
+  encryption:
+    key: !secret bedroomlight_api_encryption_key
+
+ota:
+  - platform: esphome
+    password: !secret bedroomlight_ota_password
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+      inverted: True
+    name: "Button"
+    on_press:
+      - light.toggle: bedroom_light
+
+light:
+  - platform: binary
+    name: "Bedroom Light"
+    id: bedroom_light
+    output: relay
+    restore_mode: ALWAYS_ON
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: yes

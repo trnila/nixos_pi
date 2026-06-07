@@ -44,6 +44,7 @@
             packages = [
               pkgs.nixos-rebuild
               pkgs.prek
+              pkgs.sops
             ];
           };
         }
