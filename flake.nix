@@ -1,11 +1,14 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
+  inputs.assistant.url = "github:trnila/assistant";
+
   outputs =
     {
       self,
       nixpkgs,
       nextbike,
+      assistant,
     }:
     let
       supportedSystems = [
@@ -13,10 +16,15 @@
         "aarch64-linux"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      assistantTag = assistant.rev;
     in
     {
       nixosConfigurations.pi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
+
+        specialArgs = {
+          inherit assistantTag;
+        };
         modules = [
           ./configuration.nix
           nextbike.nixosModules.default

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  assistantTag,
   ...
 }:
 
@@ -233,7 +234,7 @@
   virtualisation.oci-containers = {
     backend = "podman";
     containers.lunch = {
-      image = "ghcr.io/trnila/assistant:latest";
+      image = "ghcr.io/trnila/assistant:${assistantTag}";
       extraOptions = [
         "--network=host"
       ];
