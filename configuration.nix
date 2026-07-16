@@ -61,6 +61,10 @@
     dates = "weekly";
     options = "--delete-older-than 14d";
   };
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   hardware.deviceTree.enable = true;
   hardware.deviceTree.overlays = [
     {
