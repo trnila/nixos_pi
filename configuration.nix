@@ -54,6 +54,12 @@
     })
   ];
 
+  boot.extraModulePackages = [
+    (pkgs.callPackage ./seeed-voicecard.nix {
+      kernel = config.boot.kernelPackages.kernel;
+    })
+  ];
+
   system.stateVersion = "26.05";
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
   nix.gc = {
@@ -71,6 +77,10 @@
       name = "disable-bt-and-enable-serial";
       dtsFile = ./dts/disable-bt-and-enable-serial.dts;
     }
+    {
+      name = "seeed-8mic-voicecard";
+      dtsFile = ./dts/seeed-8mic-voicecard.dts;
+    }
   ];
   hardware.bluetooth.enable = true;
 
@@ -83,8 +93,6 @@
   systemd.network.networks."90-end0" = {
     matchConfig.Name = "end0";
     address = [
-      "192.168.1.3/24"
-      "2001:470:5816::1:1/64"
     ];
     networkConfig = {
       DHCP = "yes";
@@ -107,6 +115,10 @@
     ripgrep
     minicom
     dtc
+    git
+    gnumake
+    alsa-utils
+    gcc
   ];
 
   services.openssh.enable = true;
