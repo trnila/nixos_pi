@@ -77,7 +77,7 @@
   boot.loader.grub.enable = false;
   boot.loader.generic-extlinux-compatible.enable = true;
 
-  networking.hostName = "pi";
+  networking.hostName = "pi2";
   networking.networkmanager.enable = false;
   networking.useNetworkd = true;
   systemd.network.networks."90-end0" = {
