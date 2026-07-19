@@ -56,7 +56,11 @@
 
   system.stateVersion = "26.05";
   nixpkgs.hostPlatform = lib.mkDefault "aarch64-linux";
-  nix.gc.automatic = true;
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
   hardware.deviceTree.enable = true;
   hardware.deviceTree.overlays = [
     {
