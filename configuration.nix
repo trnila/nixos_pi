@@ -69,31 +69,7 @@
   hardware.deviceTree.overlays = [
     {
       name = "disable-bt-and-enable-serial";
-
-      dtsText = ''
-        /dts-v1/;
-        /plugin/;
-
-        / {
-          compatible = "brcm,bcm2711";
-
-          fragment@0 {
-            target-path = "/soc";
-            __overlay__ {
-                serial@7e201000 {
-                  pinctrl-0 = <&uart0_gpio14>;
-                  bluetooth {
-                    status = "disabled";
-                  };
-                };
-
-                serial@7e215040 {
-                  status = "disabled";
-                };
-            };
-          };
-        };
-      '';
+      dtsFile = ./dts/disable-bt-and-enable-serial.dts;
     }
   ];
   hardware.bluetooth.enable = true;
