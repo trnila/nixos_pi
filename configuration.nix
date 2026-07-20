@@ -314,4 +314,20 @@
       #user = "nobody";
     };
   };
+
+  systemd.services.lunch-refetch = {
+    description = "Re-fetch lunch data";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.curl}/bin/curl -X POST https://trnila.eu/lunch.json";
+    };
+  };
+  systemd.timers.lunch-refetch = {
+    description = "Run lunch-refetch every day in the morning";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "Mon..Fri *-*-* 07..11:00:00";
+      Persistent = true;
+    };
+  };
 }
