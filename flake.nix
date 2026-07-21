@@ -1,5 +1,6 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  #inputs.nixpkgs.url = "/home/daniel-trnka/nixpkgs";
   inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
   inputs.assistant.url = "github:trnila/assistant";
 
@@ -67,6 +68,9 @@ nixosConfigurations.hcm = nixpkgs.lib.nixosSystem {
               };
             };
           }
+
+          ./configuration.nix
+
         ];
 };
 

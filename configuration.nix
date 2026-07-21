@@ -13,9 +13,20 @@
     "nix-command"
     "flakes"
   ];
-  hardware.deviceTree.enable = true;
-  boot.loader.grub.enable = false;
-  boot.loader.generic-extlinux-compatible.enable = true;
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      bcachefs-tools = prev.bcachefs-tools.overrideAttrs (old: {
+        meta = (old.meta or {}) // {
+          broken = true;
+        };
+      });
+    })
+  ];
+
+  #hardware.deviceTree.enable = true;
+  #boot.loader.grub.enable = false;
+  #boot.loader.generic-extlinux-compatible.enable = true;
 
   networking.hostName = "pi";
   networking.networkmanager.enable = false;
@@ -43,7 +54,6 @@
     vim
     wget
     htop
-    ncdu
     ripgrep
     minicom
     dtc
