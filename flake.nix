@@ -14,6 +14,7 @@
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
+        "armv7l-linux"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
       assistantTag = assistant.rev;
@@ -26,6 +27,17 @@
           inherit assistantTag;
         };
         modules = [
+          {
+            nixpkgs.overlays = [
+              (final: prev: {
+                linuxKernel = prev.linuxKernel // {
+                  packagesFor = kernel: (prev.linuxKernel.packagesFor kernel).extend (lpfinal: lpprev: {
+                    bcachefs = null;
+                  });
+                };
+              })
+            ];
+          }
           ./configuration.nix
           nextbike.nixosModules.default
 
@@ -40,6 +52,24 @@
           )
         ];
       };
+
+nixosConfigurations.hcm = nixpkgs.lib.nixosSystem {
+        system = "armv7l-linux";
+        modules = [
+          {
+            nixpkgs.buildPlatform = "x86_64-linux";
+            nixpkgs.hostPlatform = "armv7l-linux";
+            boot.loader.systemd-boot.enable = true;
+            fileSystems = {
+              "/" = {
+                device = "/dev/disk/by-label/kokoti";
+                fsType = "ext4";
+              };
+            };
+          }
+        ];
+};
+
       sdImage = self.nixosConfigurations.pi.config.system.build.sdImage;
 
       devShells = forAllSystems (
