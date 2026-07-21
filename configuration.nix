@@ -103,6 +103,7 @@
     allowedTCPPorts = [
       80
       443
+      6053
     ];
   };
   time.timeZone = "Europe/Prague";
@@ -119,7 +120,23 @@
     gnumake
     alsa-utils
     gcc
+    python3
   ];
+
+  systemd.oomd = {
+    enable = true;
+    enableRootSlice = true;
+    enableSystemSlice = true;
+    enableUserSlices = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    systemWide = true;
+    pulse.enable = true;
+  };
 
   services.openssh.enable = true;
   services.openssh.settings.PermitRootLogin = "prohibit-password";
