@@ -9,6 +9,7 @@
 {
   imports = [
     ./octoprint.nix
+    ./home-assistant.nix
   ];
 
   system.stateVersion = "26.05";
@@ -78,18 +79,7 @@
     enable = true;
     extraSetFlags = [ "--ssh" ];
   };
-  services.home-assistant = {
-    enable = true;
-    extraPackages =
-      python3Packages: with python3Packages; [
-        bthome-ble
-        xiaomi-ble
-        gtts
-        pyoctoprintapi
-        zlib-ng
-        isal
-      ];
-  };
+
   services.thelounge.enable = true;
   services.redis.enable = true;
   services.nextbike-rides-viewer.enable = true;
@@ -133,11 +123,6 @@
             middlewares = [ "to-github" ];
             service = "noop@internal";
           };
-          hass = {
-            rule = "Host(`hass.trnila.eu`)";
-            entryPoints = [ "https" ];
-            service = "hass";
-          };
           thelounge = {
             rule = "Host(`trnila.eu`) && PathPrefix(`/irc/`)";
             entryPoints = [ "https" ];
@@ -153,14 +138,6 @@
         };
 
         services = {
-          hass = {
-            loadBalancer = {
-              servers = [
-                { url = "http://localhost:8123"; }
-              ];
-            };
-          };
-
           thelounge = {
             loadBalancer = {
               servers = [
