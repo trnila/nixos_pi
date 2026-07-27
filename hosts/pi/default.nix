@@ -11,6 +11,7 @@
     ./home-assistant.nix
     ./lunch.nix
     ./thelounge.nix
+    ./nextbike-rides-viewer.nix
   ];
 
   system.stateVersion = "26.05";
@@ -81,7 +82,6 @@
     extraSetFlags = [ "--ssh" ];
   };
 
-  services.nextbike-rides-viewer.enable = true;
   services.traefik = {
     enable = true;
     staticConfigOptions = {
@@ -122,22 +122,6 @@
             middlewares = [ "to-github" ];
             service = "noop@internal";
           };
-          nextbike = {
-            rule = "Host(`trnila.eu`) && PathPrefix(`/nextbike`)";
-            entryPoints = [ "https" ];
-            middlewares = [ "strip-nextbike" ];
-            service = "nextbike";
-          };
-        };
-
-        services = {
-          nextbike = {
-            loadBalancer = {
-              servers = [
-                { url = "http://localhost:8080"; }
-              ];
-            };
-          };
         };
 
         middlewares = {
@@ -146,12 +130,6 @@
               regex = ".+";
               replacement = "https://github.com/trnila";
               permanent = false;
-            };
-          };
-
-          strip-nextbike = {
-            stripprefix = {
-              prefixes = [ "/nextbike" ];
             };
           };
         };
