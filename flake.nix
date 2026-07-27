@@ -41,6 +41,22 @@
         ];
       };
 
+      nixosConfigurations.pi2 = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        modules = [
+          ./hosts/pi2/default.nix
+          (
+            { modulesPath, ... }:
+            {
+              imports = [
+                "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
+              ];
+              sdImage.compressImage = false;
+            }
+          )
+        ];
+      };
+
       devShells = forAllSystems (
         system:
         let
