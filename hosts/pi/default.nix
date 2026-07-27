@@ -13,6 +13,7 @@
     ./lunch.nix
     ./thelounge.nix
     ./nextbike-rides-viewer.nix
+    ./monitoring.nix
     ./traefik.nix
   ];
 
@@ -48,4 +49,6 @@
     enable = true;
     extraSetFlags = [ "--ssh" ];
   };
+
+  services.prometheus.exporters.node.enable = true;
 }
