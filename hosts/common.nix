@@ -26,6 +26,7 @@
     ripgrep
     minicom
     dtc
+    tmux
   ];
 
   services.openssh.enable = true;
