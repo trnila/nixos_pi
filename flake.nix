@@ -26,7 +26,7 @@
           inherit assistantTag;
         };
         modules = [
-          ./configuration.nix
+          ./hosts/pi
           nextbike.nixosModules.default
 
           (

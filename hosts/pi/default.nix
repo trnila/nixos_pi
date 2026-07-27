@@ -69,7 +69,7 @@
   hardware.deviceTree.overlays = [
     {
       name = "disable-bt-and-enable-serial";
-      dtsFile = ./dts/disable-bt-and-enable-serial.dts;
+      dtsFile = ../../dts/disable-bt-and-enable-serial.dts;
     }
   ];
   hardware.bluetooth.enable = true;
