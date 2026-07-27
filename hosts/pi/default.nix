@@ -10,6 +10,7 @@
     ./octoprint.nix
     ./home-assistant.nix
     ./lunch.nix
+    ./thelounge.nix
   ];
 
   system.stateVersion = "26.05";
@@ -80,7 +81,6 @@
     extraSetFlags = [ "--ssh" ];
   };
 
-  services.thelounge.enable = true;
   services.nextbike-rides-viewer.enable = true;
   services.traefik = {
     enable = true;
@@ -122,12 +122,6 @@
             middlewares = [ "to-github" ];
             service = "noop@internal";
           };
-          thelounge = {
-            rule = "Host(`trnila.eu`) && PathPrefix(`/irc/`)";
-            entryPoints = [ "https" ];
-            middlewares = [ "strip-irc" ];
-            service = "thelounge";
-          };
           nextbike = {
             rule = "Host(`trnila.eu`) && PathPrefix(`/nextbike`)";
             entryPoints = [ "https" ];
@@ -137,13 +131,6 @@
         };
 
         services = {
-          thelounge = {
-            loadBalancer = {
-              servers = [
-                { url = "http://localhost:9000"; }
-              ];
-            };
-          };
           nextbike = {
             loadBalancer = {
               servers = [
@@ -159,12 +146,6 @@
               regex = ".+";
               replacement = "https://github.com/trnila";
               permanent = false;
-            };
-          };
-
-          strip-irc = {
-            stripprefix = {
-              prefixes = [ "/irc" ];
             };
           };
 
