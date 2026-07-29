@@ -32,6 +32,9 @@
   services.linux-voice-assistant = {
     enable = true;
   };
+  services.speech-to-phrase = {
+    enable = true;
+  };
 
   services.pipewire = {
     enable = true;
