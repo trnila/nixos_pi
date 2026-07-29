@@ -27,6 +27,9 @@
     minicom
     dtc
     tmux
+    git
+    python3
+    gcc
   ];
 
   services.openssh.enable = true;
