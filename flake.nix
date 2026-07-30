@@ -1,5 +1,6 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  #inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:trnila/nixpkgs/linux-voice-assistant";
   inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
   inputs.assistant.url = "github:trnila/assistant";
 
@@ -45,6 +46,7 @@
         system = "aarch64-linux";
         modules = [
           ./hosts/pi2/default.nix
+          ./modules/default.nix
           {
             nixpkgs.overlays = [
               (import ./pkgs)

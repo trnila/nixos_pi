@@ -51,16 +51,16 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1784120854,
-        "narHash": "sha256-KesHgItiZPgGX740axSiQLcIQ8D24MDqNpkKYWIek8k=",
-        "owner": "NixOS",
+        "lastModified": 1785430703,
+        "narHash": "sha256-maQ+QfpBBi3TzL0uMR+SpDE3n2PBawA4MNfU5XPVZ/Y=",
+        "owner": "trnila",
         "repo": "nixpkgs",
-        "rev": "753cc8a3a87467296ddd1fa93f0cc3e81120ee46",
+        "rev": "93fc057b0164646b53b720a79ff4d40e55b2078e",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "owner": "trnila",
+        "ref": "linux-voice-assistant",
         "repo": "nixpkgs",
         "type": "github"
       }

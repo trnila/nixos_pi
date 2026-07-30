@@ -29,6 +29,18 @@
     (pkgs.seeed-voicecard config.boot.kernelPackages.kernel)
   ];
 
+  services.linux-voice-assistant = {
+    enable = true;
+  };
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    systemWide = true;
+    pulse.enable = true;
+  };
+
   # fix booting from SSD over USB3
   boot.kernelParams = [
     "usb-storage.quirks=152d:1576:u"
@@ -47,6 +59,12 @@
     networkConfig = {
       DHCP = "yes";
     };
+  };
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      6053
+    ];
   };
 
   services.tailscale = {
