@@ -45,6 +45,11 @@
         system = "aarch64-linux";
         modules = [
           ./hosts/pi2/default.nix
+          {
+            nixpkgs.overlays = [
+              (import ./pkgs)
+            ];
+          }
           (
             { modulesPath, ... }:
             {

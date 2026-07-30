@@ -19,6 +19,14 @@
       name = "disable-bt-and-enable-serial";
       dtsFile = ../../dts/disable-bt-and-enable-serial.dts;
     }
+    {
+      name = "seeed-8mic-voicecard";
+      dtsFile = ../../dts/seeed-8mic-voicecard.dts;
+    }
+  ];
+
+  boot.extraModulePackages = [
+    (pkgs.seeed-voicecard config.boot.kernelPackages.kernel)
   ];
 
   # fix booting from SSD over USB3
