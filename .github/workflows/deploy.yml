@@ -16,7 +16,6 @@ jobs:
       - run: nix develop -c prek run --all-files
 
   deploy:
-    if: github.ref == 'refs/heads/master' && github.repository == 'trnila/nixos_pi'
     runs-on: ubuntu-latest
     needs: prek
     steps:
