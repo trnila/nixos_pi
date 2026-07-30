@@ -16,7 +16,7 @@ $ ./deploy.sh
 
 The SD card image can be created with:
 ```sh
-$ nix build .#sdImage
+$ nix build .#nixosConfigurations.pi.config.system.build.sdImage
 ```
 
 ## Deploy from CI

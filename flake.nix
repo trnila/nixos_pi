@@ -40,7 +40,6 @@
           )
         ];
       };
-      sdImage = self.nixosConfigurations.pi.config.system.build.sdImage;
 
       devShells = forAllSystems (
         system:
