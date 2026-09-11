@@ -2,11 +2,11 @@
   "nodes": {
     "assistant": {
       "locked": {
-        "lastModified": 1788745357,
-        "narHash": "sha256-vZjf6zbm7pAx4DfYZ/9mzSfB4Q8SgJHH71WGnNW6u4A=",
+        "lastModified": 1789074305,
+        "narHash": "sha256-hpbqxWCk4FVLxNbd46FFe+8toBciUqeaW8IYkkmDDA8=",
         "owner": "trnila",
         "repo": "assistant",
-        "rev": "e7c29fb279e6cfc2ca4b1839bc656e043aae783e",
+        "rev": "5cb6b5c5bb345f6d842852f10f7e060cc67bc136",
         "type": "github"
       },
       "original": {
