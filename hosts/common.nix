@@ -13,6 +13,8 @@
     "flakes"
   ];
 
+  services.journald.storage = "volatile";
+
   networking.networkmanager.enable = false;
   networking.useNetworkd = true;
 
