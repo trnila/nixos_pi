@@ -13,6 +13,10 @@
     "flakes"
   ];
 
+  boot.kernelParams = [
+    "usb-storage.quirks=152d:1576:u"
+  ];
+
   services.journald.storage = "volatile";
 
   networking.networkmanager.enable = false;
