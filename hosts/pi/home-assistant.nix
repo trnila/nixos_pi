@@ -12,6 +12,11 @@
         zlib-ng
         isal
         wyoming
+
+        # thread/matter
+        python-otbr-api
+        universal-silabs-flasher
+        ha-silabs-firmware-client
       ];
   };
 
@@ -28,6 +33,19 @@
     model = "small.en";
     language = "en";
     uri = "tcp://127.0.0.1:10300";
+  };
+
+  services.openthread-border-router = {
+    enable = true;
+    backboneInterfaces = [ "end0" ];
+    web.enable = true;
+    radio = {
+      device = "/dev/serial/by-id/usb-Espressif_USB_JTAG_serial_debug_unit_40:4C:CA:45:32:54-if00";
+    };
+  };
+  services.matterjs-server = {
+    enable = true;
+    extraArgs = [ "--primary-interface=wpan0" ];
   };
 
   services.traefik.dynamicConfigOptions.http.routers.home-assistant = {
