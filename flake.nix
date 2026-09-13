@@ -1,5 +1,5 @@
 {
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
   inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
   inputs.assistant.url = "github:trnila/assistant";
 
