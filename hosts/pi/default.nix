@@ -44,6 +44,9 @@
     };
   };
   networking.firewall.enable = true;
+  networking.firewall.allowedUDPPorts = [
+    5353 # mDNS
+  ];
 
   services.tailscale = {
     enable = true;
