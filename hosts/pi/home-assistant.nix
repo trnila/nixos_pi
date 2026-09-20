@@ -47,6 +47,14 @@
     enable = true;
     extraArgs = [ "--primary-interface=wpan0" ];
   };
+  boot.kernelModules = [
+    # needs to be available, when settings nf_conntrack_udp_timeout_stream
+    "nf_conntrack"
+  ];
+  # Matter is not using one port -> keep related connections for a longer time for sleepy devices
+  boot.kernel.sysctl = {
+    "net.netfilter.nf_conntrack_udp_timeout_stream" = 30 * 60;
+  };
 
   services.traefik.dynamicConfigOptions.http.routers.home-assistant = {
     rule = "Host(`hass.trnila.eu`)";
