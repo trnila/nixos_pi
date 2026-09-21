@@ -13,6 +13,8 @@
     "flakes"
   ];
 
+  fileSystems."/".options = [ "noatime" ];
+
   boot.tmp.useTmpfs = true;
   boot.kernelParams = [
     "usb-storage.quirks=152d:1576:u"
