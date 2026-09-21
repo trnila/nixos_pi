@@ -19,6 +19,9 @@
 
   services.journald.storage = "volatile";
 
+  services.earlyoom.enable = true;
+  systemd.oomd.enable = false;
+
   networking.networkmanager.enable = false;
   networking.useNetworkd = true;
 
