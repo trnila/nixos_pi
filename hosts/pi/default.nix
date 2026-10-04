@@ -14,6 +14,7 @@
     ./thelounge.nix
     ./nextbike-rides-viewer.nix
     ./monitoring.nix
+    ./silverbullet.nix
     ./traefik.nix
   ];
 
