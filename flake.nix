@@ -16,18 +16,30 @@
         "aarch64-linux"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      overlays = [ (import ./pkgs) ];
+      pkgsFor =
+        system:
+        import nixpkgs {
+          inherit system overlays;
+        };
       assistantTag = assistant.rev;
     in
     {
+      pkgs = forAllSystems pkgsFor;
+
       nixosConfigurations.pi = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-
         specialArgs = {
           inherit assistantTag;
         };
         modules = [
           ./hosts/pi
           nextbike.nixosModules.default
+
+          {
+            nixpkgs.hostPlatform = "aarch64-linux";
+            nixpkgs.overlays = overlays;
+          }
 
           (
             { modulesPath, ... }:
@@ -44,7 +56,7 @@
       devShells = forAllSystems (
         system:
         let
-          pkgs = import nixpkgs { inherit system; };
+          pkgs = pkgsFor system;
         in
         {
           default = pkgs.mkShell {
