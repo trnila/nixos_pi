@@ -20,6 +20,7 @@
 
   system.stateVersion = "26.05";
 
+  hardware.enableRedistributableFirmware = lib.mkForce false;
   hardware.deviceTree.enable = true;
   hardware.deviceTree.overlays = [
     {
