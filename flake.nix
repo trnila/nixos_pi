@@ -61,7 +61,7 @@
         {
           default = pkgs.mkShell {
             packages = [
-              pkgs.nixos-rebuild
+              pkgs.nh
               pkgs.prek
               pkgs.sops
             ];

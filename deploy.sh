@@ -8,4 +8,4 @@ if [ -z "$DEPLOY_HOST" ]; then
   exit 1
 fi
 
-nixos-rebuild --flake ".#$DEPLOY_HOST" --target-host "root@$DEPLOY_HOST" --build-host "root@$DEPLOY_HOST" --no-reexec switch
+nh os switch ".#$DEPLOY_HOST" --target-host "root@$DEPLOY_HOST" --build-host "root@$DEPLOY_HOST"
