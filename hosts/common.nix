@@ -42,6 +42,9 @@
     git
     python3
     gcc
+    rsync
+    strace
+    file
   ];
 
   services.openssh.enable = true;
