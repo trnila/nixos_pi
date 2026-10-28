@@ -15,6 +15,7 @@
     ./nextbike-rides-viewer.nix
     ./monitoring.nix
     ./silverbullet.nix
+    ./part-db.nix
     ./traefik.nix
   ];
 
