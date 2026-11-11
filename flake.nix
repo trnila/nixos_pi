@@ -1,5 +1,6 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/master";
+  inputs.nixpkgs_stable.url = "github:NixOS/nixpkgs/nixos-26.05";
   inputs.nextbike.url = "github:trnila/nextbike_rides_viewer";
   inputs.assistant.url = "github:trnila/assistant";
 
@@ -7,6 +8,7 @@
     {
       self,
       nixpkgs,
+      nixpkgs_stable,
       nextbike,
       assistant,
     }:
@@ -51,6 +53,13 @@
               sdImage.compressImage = false;
             }
           )
+        ];
+      };
+
+      nixosConfigurations.ntb = nixpkgs_stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/ntb
         ];
       };
 
