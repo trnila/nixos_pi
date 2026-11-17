@@ -45,6 +45,7 @@
     rsync
     strace
     file
+    dix
   ];
 
   services.openssh.enable = true;
